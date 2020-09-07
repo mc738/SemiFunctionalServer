@@ -11,6 +11,7 @@
     <e p="$USER_HOME$/.nuget/packages/mstest.testadapter/2.1.0/build/netcoreapp1.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" t="Include" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="Documentation" t="Include" />
+      <e p="LICENSE" t="Include" />
       <e p="README.md" t="Include" />
       <e p="SFS.App" t="IncludeRecursive">
         <e p="Program.fs" t="Include" />
@@ -21,6 +22,7 @@
       <e p="SFS.Core" t="IncludeRecursive">
         <e p="Library.fs" t="Include" />
         <e p="SFS.Core.fsproj" t="IncludeRecursive" />
+        <e p="Server.fs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive" />
       </e>
