@@ -1,17 +1,25 @@
 namespace SFS.Core.Utilities
 
-
+/// Helpers for working with streams.
 module Streams =
 
     open System.IO
-    
-    let readToBuffer (stream:Stream) bufferSize = async {
-        let buffer = [|for i in [0..bufferSize] -> 0uy|]
-        stream.ReadAsync(buffer, 0, bufferSize) |> Async.AwaitTask |> ignore
-        return buffer
-    }
-        
 
+    /// Read a stream into a buffer.
+    let readToBuffer (stream: Stream) bufferSize =
+        async {
+            // TODO What if more data than buffer size?
+            let buffer =
+                [| for i in [ 0 .. bufferSize ] -> 0uy |]
+
+            stream.ReadAsync(buffer, 0, bufferSize)
+            |> Async.AwaitTask
+            |> ignore
+
+            return buffer
+        }
+
+/// Helpers for working with threads.
 module Threads =
     open System.Threading.Tasks
 
@@ -23,7 +31,15 @@ module Threads =
     /// Convert a ValueTask<'a> to Async<'a>.
     let convertValueTask<'a> (task: ValueTask<'a>) = task.AsTask() |> Async.AwaitTask
 
+    /// A helper function simulate a synchronously blocking process.
+    let blockFor time =
+        // Test - wait one second before replying.
+        Async.Sleep time
+        |> Async.RunSynchronously
+        |> ignore
 
+
+/// Helpers for working with messages.
 module Messaging =
     open System.Threading.Channels
 
@@ -74,6 +90,7 @@ module Messaging =
 
                   loop ())
 
+    /// Create a channel, and get it's reader and writer.
     let createChannel<'a> =
         let channel = Channel.CreateUnbounded<'a>()
         let reader = Reader channel.Reader

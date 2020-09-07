@@ -5,8 +5,6 @@ open SFS.Core
 
 [<EntryPoint>]
 let main argv =
-    
+    // Start the server.
     Server.start
-    
-    printfn "Hello World from F#!"
     0 // return an integer exit code
