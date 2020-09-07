@@ -57,8 +57,8 @@
         <option value="$PROJECT_DIR$/ExampleWebSite/index.html" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/SFS_Article.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/SFS.Core/Logging.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Server.fs" />
+        <option value="$PROJECT_DIR$/SFS.Core/Logging.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Utilities.fs" />
       </list>
     </option>
@@ -132,7 +132,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599502186875</updated>
       <workItem from="1599502207074" duration="240000" />
-      <workItem from="1599503174378" duration="6670000" />
+      <workItem from="1599503174378" duration="7727000" />
     </task>
     <task id="LOCAL-00001" summary="Initalized">
       <created>1599503467543</created>
@@ -155,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599504178897</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Adding Logging.fs and Utilities.fs.">
+      <created>1599511059556</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1599511059556</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,7 +199,8 @@
     <MESSAGE value="Initalized" />
     <MESSAGE value="Added Server.fs." />
     <MESSAGE value="Test commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Test commit." />
+    <MESSAGE value="Adding Logging.fs and Utilities.fs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Logging.fs and Utilities.fs." />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="158" width="424" height="490" key="FileChooserDialogImpl" timestamp="1599503854103">

@@ -1,8 +1,6 @@
 namespace SFS.Core.Logging
 
 open System
-open System.ComponentModel
-open Microsoft.VisualBasic
 open SFS.Core.Utilities
 
 type LogItem =
@@ -38,6 +36,6 @@ type Logger() =
         printfn "[%s] %s: %s" time item.from item.message
         true
  
-    let listener = Threads.createMBP<LogItem> handleItem
+    let listener = Messaging.createMBP<LogItem> handleItem
 
     member this.Post item = listener.Post item
