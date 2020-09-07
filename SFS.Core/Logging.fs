@@ -25,7 +25,7 @@ type Logger() =
         | Error -> (ConsoleColor.Red, "ERROR")
         | Information -> (ConsoleColor.White, "INFO")
         | Warning -> (ConsoleColor.Yellow, "WARN")
-        | Debug -> (ConsoleColor.DarkGray, "DEBUG")
+        | Debug -> (ConsoleColor.Magenta, "DEBUG")
 
     let handleItem item = 
         let (color, title) = getCCT item.``type``

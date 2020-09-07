@@ -24,7 +24,7 @@ module Server =
 
     /// Handle a connection.
     /// This is designed to be run off of the main thread.
-    let handleConnection (connection: TcpClient) =
+    let handleConnection (logger:Logger) (connection: TcpClient) = async {
         // TODO add POC logging here.
         logger.Post { from = "Connection Handler"; message = "In handler."; time = DateTime.Now; ``type`` = Debug }
 
@@ -33,17 +33,17 @@ module Server =
         // Get the network stream
         let stream = connection.GetStream()
         
-        // Create a buffer to hold the message.
-        let buffer = [|for i in [0..255] -> 0uy|]
-        
         // Read the incoming request into the buffer.
-        stream.ReadAsync(buffer, 0, 255) |> Async.AwaitTask |> Async.RunSynchronously |> ignore
+        let! buffer = Streams.readToBuffer stream 255 // |> Async.RunSynchronously
         
         let text = Encoding.UTF8.GetString buffer 
         
         let msg = sprintf "Message received: '%s'" text 
         
         logger.Post { from = "Connection Handler"; message = text; time = DateTime.Now; ``type`` = Information }
+        
+        // Test - wait one second before replying.
+        Async.Sleep 5000 |> Async.RunSynchronously |> ignore
         
         // Create a basic response.
         let response = Encoding.Default.GetBytes "Hello, world!" 
@@ -52,7 +52,9 @@ module Server =
         // For now this will close the connection afterwards.
         stream.Write(response, 0, response.Length)
         
-        connection.Close()
+        connection.Close()  
+    }
+      
        
 
     let rec listen () =
@@ -64,7 +66,7 @@ module Server =
         logger.Post { from = "Listener"; message = "Connection received."; time = DateTime.Now; ``type`` = Debug }
 
         // Send to a background thread to handle.
-        handleConnection connection |> sendToTPL |> ignore
+        handleConnection logger connection |> Async.Start |> ignore
 
         // TODO add POC logging here.
         logger.Post { from = "Listener"; message = "Back to main."; time = DateTime.Now; ``type`` = Debug }

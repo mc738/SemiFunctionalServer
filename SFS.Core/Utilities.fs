@@ -1,5 +1,17 @@
 namespace SFS.Core.Utilities
 
+
+module Streams =
+
+    open System.IO
+    
+    let readToBuffer (stream:Stream) bufferSize = async {
+        let buffer = [|for i in [0..bufferSize] -> 0uy|]
+        stream.ReadAsync(buffer, 0, bufferSize) |> Async.AwaitTask |> ignore
+        return buffer
+    }
+        
+
 module Threads =
     open System.Threading.Tasks
 

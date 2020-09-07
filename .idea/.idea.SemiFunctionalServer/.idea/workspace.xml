@@ -21,11 +21,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57946309-cec9-41e3-b4a7-ecb98dac4748" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.App/Program.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.App/Program.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.App/SFS.App.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.App/SFS.App.fsproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SFS.Core/Logging.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Logging.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SFS.Core/Server.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Server.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SFS.Core/Utilities.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Utilities.fs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,11 +54,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/ExampleWebSite/index.html" />
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/SFS_Article.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/SFS.Core/Utilities.fs" />
-        <option value="$PROJECT_DIR$/SFS.Core/Logging.fs" />
         <option value="$PROJECT_DIR$/SFS.App/Program.fs" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/SFS_Article.md" />
+        <option value="$PROJECT_DIR$/SFS.Core/Logging.fs" />
+        <option value="$PROJECT_DIR$/SFS.Core/Utilities.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Server.fs" />
       </list>
     </option>
@@ -74,6 +73,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34988362" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.30023274" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -133,7 +134,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599502186875</updated>
       <workItem from="1599502207074" duration="240000" />
-      <workItem from="1599503174378" duration="9807000" />
+      <workItem from="1599503174378" duration="12927000" />
     </task>
     <task id="LOCAL-00001" summary="Initalized">
       <created>1599503467543</created>
@@ -177,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599511338289</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Got basic async tcp server working.">
+      <created>1599513201424</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1599513201424</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,7 +225,8 @@
     <MESSAGE value="Adding Logging.fs and Utilities.fs." />
     <MESSAGE value="Fixed Logging.fs." />
     <MESSAGE value="Removed Library.fs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed Library.fs." />
+    <MESSAGE value="Got basic async tcp server working." />
+    <option name="LAST_COMMIT_MESSAGE" value="Got basic async tcp server working." />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="158" width="424" height="490" key="FileChooserDialogImpl" timestamp="1599503854103">
@@ -228,22 +237,86 @@
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="496" y="300" width="373" height="206" key="Github.ShareDialog/0.32.1366.736@0.32.1366.736" timestamp="1599503534372" />
-    <state width="1320" height="171" key="GridCell.Tab.0.bottom" timestamp="1599512899927">
+    <state width="1320" height="241" key="GridCell.Tab.0.bottom" timestamp="1599517022916">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="171" key="GridCell.Tab.0.bottom/0.32.1366.736@0.32.1366.736" timestamp="1599512899927" />
-    <state width="1320" height="171" key="GridCell.Tab.0.center" timestamp="1599512899926">
+    <state width="1320" height="241" key="GridCell.Tab.0.bottom/0.32.1366.736@0.32.1366.736" timestamp="1599517022916" />
+    <state width="1320" height="241" key="GridCell.Tab.0.center" timestamp="1599517022915">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="171" key="GridCell.Tab.0.center/0.32.1366.736@0.32.1366.736" timestamp="1599512899926" />
-    <state width="1320" height="171" key="GridCell.Tab.0.left" timestamp="1599512899925">
+    <state width="1320" height="241" key="GridCell.Tab.0.center/0.32.1366.736@0.32.1366.736" timestamp="1599517022915" />
+    <state width="1320" height="241" key="GridCell.Tab.0.left" timestamp="1599517022915">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="171" key="GridCell.Tab.0.left/0.32.1366.736@0.32.1366.736" timestamp="1599512899925" />
-    <state width="1320" height="171" key="GridCell.Tab.0.right" timestamp="1599512899926">
+    <state width="1320" height="241" key="GridCell.Tab.0.left/0.32.1366.736@0.32.1366.736" timestamp="1599517022915" />
+    <state width="1320" height="241" key="GridCell.Tab.0.right" timestamp="1599517022916">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="171" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1599512899926" />
+    <state width="1320" height="241" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1599517022916" />
+    <state width="1320" height="241" key="GridCell.Tab.1.bottom" timestamp="1599517026822">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.1.bottom/0.32.1366.736@0.32.1366.736" timestamp="1599517026822" />
+    <state width="1320" height="241" key="GridCell.Tab.1.center" timestamp="1599517026818">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.1.center/0.32.1366.736@0.32.1366.736" timestamp="1599517026818" />
+    <state width="1320" height="241" key="GridCell.Tab.1.left" timestamp="1599517026818">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.1.left/0.32.1366.736@0.32.1366.736" timestamp="1599517026818" />
+    <state width="1320" height="241" key="GridCell.Tab.1.right" timestamp="1599517026821">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.1.right/0.32.1366.736@0.32.1366.736" timestamp="1599517026821" />
+    <state width="1320" height="241" key="GridCell.Tab.2.bottom" timestamp="1599517022375">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.2.bottom/0.32.1366.736@0.32.1366.736" timestamp="1599517022375" />
+    <state width="1320" height="241" key="GridCell.Tab.2.center" timestamp="1599517022373">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.2.center/0.32.1366.736@0.32.1366.736" timestamp="1599517022373" />
+    <state width="1320" height="241" key="GridCell.Tab.2.left" timestamp="1599517022372">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.2.left/0.32.1366.736@0.32.1366.736" timestamp="1599517022372" />
+    <state width="1320" height="241" key="GridCell.Tab.2.right" timestamp="1599517022374">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.2.right/0.32.1366.736@0.32.1366.736" timestamp="1599517022374" />
+    <state width="1320" height="241" key="GridCell.Tab.3.bottom" timestamp="1599517022380">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.3.bottom/0.32.1366.736@0.32.1366.736" timestamp="1599517022380" />
+    <state width="1320" height="241" key="GridCell.Tab.3.center" timestamp="1599517022378">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.3.center/0.32.1366.736@0.32.1366.736" timestamp="1599517022378" />
+    <state width="1320" height="241" key="GridCell.Tab.3.left" timestamp="1599517022377">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.3.left/0.32.1366.736@0.32.1366.736" timestamp="1599517022377" />
+    <state width="1320" height="241" key="GridCell.Tab.3.right" timestamp="1599517022380">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.3.right/0.32.1366.736@0.32.1366.736" timestamp="1599517022380" />
+    <state width="1320" height="241" key="GridCell.Tab.4.bottom" timestamp="1599517022385">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.4.bottom/0.32.1366.736@0.32.1366.736" timestamp="1599517022385" />
+    <state width="1320" height="241" key="GridCell.Tab.4.center" timestamp="1599517022382">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.4.center/0.32.1366.736@0.32.1366.736" timestamp="1599517022382" />
+    <state width="1320" height="241" key="GridCell.Tab.4.left" timestamp="1599517022381">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.4.left/0.32.1366.736@0.32.1366.736" timestamp="1599517022381" />
+    <state width="1320" height="241" key="GridCell.Tab.4.right" timestamp="1599517022383">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state width="1320" height="241" key="GridCell.Tab.4.right/0.32.1366.736@0.32.1366.736" timestamp="1599517022383" />
     <state x="278" y="135" width="800" height="536" key="Rider.ProjectTemplateDialog.Size" timestamp="1599502359493">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
@@ -256,5 +329,24 @@
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.32.1366.736@0.32.1366.736" timestamp="1599509387236" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/SFS.Core/Server.fs</url>
+          <line>36</line>
+          <properties documentPath="$PROJECT_DIR$/SFS.Core/Server.fs" initialLine="36">
+            <startOffsets>
+              <option value="1035" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1066" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
