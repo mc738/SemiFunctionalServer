@@ -5,11 +5,29 @@
     <projectFile>SFS.Test/SFS.Test.fsproj</projectFile>
   </component>
   <component name="BranchesTreeState">
-    <expand />
-    <select />
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:1.Getting_Started" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57946309-cec9-41e3-b4a7-ecb98dac4748" name="Default Changelist" comment="" />
+    <list default="true" id="57946309-cec9-41e3-b4a7-ecb98dac4748" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/SFS.Core/Logging.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SFS.Core/Utilities.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SFS.Core/SFS.Core.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/SFS.Core.fsproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SFS.Core/Server.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Server.fs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,12 +48,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Server.fs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/ExampleWebSite/index.html" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/SFS_Article.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/SFS.Core/Logging.fs" />
+        <option value="$PROJECT_DIR$/SFS.Core/Server.fs" />
+        <option value="$PROJECT_DIR$/SFS.Core/Utilities.fs" />
       </list>
     </option>
   </component>
@@ -53,7 +77,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Markdown" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ExampleWebSite" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/LICENSE" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunManager" selected=".NET Project.SFS.App">
     <configuration name="SFS.App" type="DotNetProject" factoryName=".NET Project">
@@ -102,7 +132,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599502186875</updated>
       <workItem from="1599502207074" duration="240000" />
-      <workItem from="1599503174378" duration="570000" />
+      <workItem from="1599503174378" duration="6670000" />
     </task>
     <task id="LOCAL-00001" summary="Initalized">
       <created>1599503467543</created>
@@ -111,7 +141,21 @@
       <option name="project" value="LOCAL" />
       <updated>1599503467543</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added Server.fs.">
+      <created>1599503986605</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1599503986605</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Test commit.">
+      <created>1599504178897</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1599504178897</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,7 +168,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="1.Getting_Started" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -134,13 +190,15 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Initalized" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initalized" />
+    <MESSAGE value="Added Server.fs." />
+    <MESSAGE value="Test commit." />
+    <option name="LAST_COMMIT_MESSAGE" value="Test commit." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="466" y="158" width="424" height="490" key="FileChooserDialogImpl" timestamp="1599503758958">
+    <state x="466" y="158" width="424" height="490" key="FileChooserDialogImpl" timestamp="1599503854103">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="466" y="158" width="424" height="490" key="FileChooserDialogImpl/0.32.1366.736@0.32.1366.736" timestamp="1599503758958" />
+    <state x="466" y="158" width="424" height="490" key="FileChooserDialogImpl/0.32.1366.736@0.32.1366.736" timestamp="1599503854103" />
     <state x="496" y="300" width="373" height="206" key="Github.ShareDialog" timestamp="1599503534372">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
@@ -149,9 +207,13 @@
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="278" y="135" width="800" height="536" key="Rider.ProjectTemplateDialog.Size/0.32.1366.736@0.32.1366.736" timestamp="1599502359493" />
-    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1599503602521">
+    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1599504185223">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1599503602521" />
+    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1599504185223" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1599509387236">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.32.1366.736@0.32.1366.736" timestamp="1599509387236" />
   </component>
 </project>

@@ -6,6 +6,8 @@
 
     <ItemGroup>
         <Compile Include="Library.fs" />
+        <Compile Include="Utilities.fs" />
+        <Compile Include="Logging.fs" />
         <Compile Include="Server.fs" />
     </ItemGroup>
 

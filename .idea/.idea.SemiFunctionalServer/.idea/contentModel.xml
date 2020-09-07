@@ -21,8 +21,10 @@
       </e>
       <e p="SFS.Core" t="IncludeRecursive">
         <e p="Library.fs" t="Include" />
+        <e p="Logging.fs" t="Include" />
         <e p="SFS.Core.fsproj" t="IncludeRecursive" />
         <e p="Server.fs" t="Include" />
+        <e p="Utilities.fs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive" />
       </e>
