@@ -20,12 +20,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57946309-cec9-41e3-b4a7-ecb98dac4748" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.App/Program.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.App/Program.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.Core/Server.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Server.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.Core/Utilities.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Utilities.fs" afterDir="false" />
-    </list>
+    <list default="true" id="57946309-cec9-41e3-b4a7-ecb98dac4748" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,6 +42,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.App/Program.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Logging.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Server.fs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -134,7 +130,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599502186875</updated>
       <workItem from="1599502207074" duration="240000" />
-      <workItem from="1599503174378" duration="13901000" />
+      <workItem from="1599503174378" duration="14151000" />
     </task>
     <task id="LOCAL-00001" summary="Initalized">
       <created>1599503467543</created>
@@ -192,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599517431008</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Cleaned up code.">
+      <created>1599518058290</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1599518058290</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,7 +237,8 @@
     <MESSAGE value="Removed Library.fs." />
     <MESSAGE value="Got basic async tcp server working." />
     <MESSAGE value="Fixed async and logger issues." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed async and logger issues." />
+    <MESSAGE value="Cleaned up code." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up code." />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="158" width="424" height="490" key="FileChooserDialogImpl" timestamp="1599503854103">
@@ -329,10 +333,10 @@
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="278" y="135" width="800" height="536" key="Rider.ProjectTemplateDialog.Size/0.32.1366.736@0.32.1366.736" timestamp="1599502359493" />
-    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1599511346011">
+    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1599518064947">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1599511346011" />
+    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1599518064947" />
     <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1599509387236">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
