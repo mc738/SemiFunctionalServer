@@ -1,10 +1,14 @@
 namespace SFS.Core
 
+open System.Data
+open SFS.Core.Routing
+
 module Server =
     open System
     open System.Text
     open SFS.Core.Logging
     open SFS.Core.Utilities
+    open SFS.Core.Http
     open System.Net.Sockets
 
     let logger = Logger()
@@ -16,9 +20,38 @@ module Server =
     /// The tcp listener.
     let listener = TcpListener.Create(port)
 
+    let routes =
+        seq {
+            { contentType = ContentTypes.Html
+              routePaths = seq { "/" }
+              contentPath = ""
+              routeType = RouteType.Static }
+            { contentType = ContentTypes.Css
+              routePaths = seq { "/css/style.css" }
+              contentPath = ""
+              routeType = RouteType.Static }
+            { contentType = ContentTypes.Css
+              routePaths = seq { "/js/index.js" }
+              contentPath = ""
+              routeType = RouteType.Static }
+        }
+
+    let notFound =
+
+        let paths = Seq.empty
+
+        { paths = paths
+          contentType = ContentTypes.Html
+          routeType = RouteType.Static
+          content = None }
+
+    let routeMap = createRoutesMap routes
+
+
+
     /// Handle a connection.
     /// This is designed to be run off of the main thread.
-    let handleConnection (logger: Logger) (connection: TcpClient) =
+    let handleConnection (connection: TcpClient) (handler: (Request -> Response)) =
         async {
             // For now accept a message, convert to string and send back a message.
             logger.Post
@@ -32,6 +65,14 @@ module Server =
 
             // Read the incoming request into the buffer.
             let! buffer = Streams.readToBuffer stream 255 // |> Async.RunSynchronously
+
+            let request = Http.deserializeRequest buffer
+
+            // TODO Handle 500.
+
+            // Pass too the
+            // TODO if request is error return 400.
+            let response = handler request
 
             // The message text.
             let text = Encoding.UTF8.GetString buffer
@@ -54,7 +95,7 @@ module Server =
         }
 
     /// The listening loop.
-    let rec listen () =
+    let rec listen (handler: (Request -> Response)) =
         // Await a connection.
         // This is blocking.
         let connection = listener.AcceptTcpClient()
@@ -67,7 +108,7 @@ module Server =
 
         // Send to a background thread to handle.
         // **NOTE** logger needs to be passed, not referenced.
-        handleConnection logger connection
+        handleConnection connection handler
         |> Async.Start
         |> ignore
 
@@ -78,10 +119,15 @@ module Server =
               ``type`` = Debug }
 
         // Repeat the listen loop.
-        listen ()
+        listen (handler)
 
     /// Start the listening loop and accept incoming requests.
     let start =
+
+        // "Inject" the route map, the 404 page and logger.
+        // The handler can then be passed to the listen loop.
+        let handler =
+            ConnectionHandler.handle routeMap notFound logger
 
         logger.Post
             { from = "Main"
@@ -98,6 +144,6 @@ module Server =
 
         // Pass the listener to `listen` function.
         // This will recursively handle requests.
-        listen () |> ignore
+        listen (handler) |> ignore
 
 // TODO Add shutdown.

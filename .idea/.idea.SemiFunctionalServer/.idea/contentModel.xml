@@ -20,6 +20,7 @@
         <e p="obj" t="ExcludeRecursive" />
       </e>
       <e p="SFS.Core" t="IncludeRecursive">
+        <e p="ConnectionHandler.fs" t="Include" />
         <e p="Http.fs" t="Include" />
         <e p="Logging.fs" t="Include" />
         <e p="Routing.fs" t="Include" />
