@@ -51,18 +51,26 @@ module Routing =
 
             Error message
 
-    let splitResults<'a, 'b> results =
+    let createRoutes<'a, 'b> results =
         results
         |> Seq.map createStaticRoute
         |> Results.splitResults
-     
-    let createRoutes (routes: RouteSetting seq) =
-        let (successful,errors) = splitResults routes
-        
-        // TODO log any errors.        
-        successful
-        
-    let matchRoute (routes: Map<string, Route>) (notFound: Route) (route:string) =
+
+    let createRouteMap (state: Map<string, Route>) (route: Route) =
+        let newRoutes =
+            route.paths
+            |> Seq.map (fun r -> (r, route))
+            |> Map.ofSeq
+
+        Maps.join state newRoutes
+
+    let createRoutesMap (routes: RouteSetting seq) =
+        let (successful, errors) = createRoutes routes
+
+        // TODO log any errors.
+        successful |> Seq.fold createRouteMap Map.empty
+
+    let matchRoute (routes: Map<string, Route>) (notFound: Route) (route: string) =
         match routes.TryFind route with
-        | Some route -> route 
+        | Some route -> route
         | None -> notFound

@@ -109,3 +109,10 @@ module Results =
         /// Returns a tuple (successful,errors)
         let splitResults<'a, 'b> results =
             results |> Seq.fold splitResult (Seq.empty :> 'a seq, Seq.empty :> 'b seq)
+            
+module Maps =
+    
+    /// Join to maps.
+    /// From: https://stackoverflow.com/questions/3974758/in-f-how-do-you-merge-2-collections-map-instances.
+    let join (p:Map<'a,'b>) (q:Map<'a,'b>) = 
+        Map(Seq.concat [ (Map.toSeq p) ; (Map.toSeq q) ])
