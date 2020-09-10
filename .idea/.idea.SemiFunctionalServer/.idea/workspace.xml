@@ -21,11 +21,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57946309-cec9-41e3-b4a7-ecb98dac4748" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.Core/SFS.Core.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/SFS.Core.fsproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.Core/Server.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Server.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SFS.Core/Utilities.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Utilities.fs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +48,7 @@
     <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.App/Program.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Routing.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Logging.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Utilities.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Server.fs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -63,10 +61,10 @@
         <option value="$PROJECT_DIR$/SFS.App/Program.fs" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/SFS.Core/Http.fs" />
-        <option value="$PROJECT_DIR$/SFS.Core/Utilities.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Routing.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Server.fs" />
+        <option value="$PROJECT_DIR$/SFS.Core/Utilities.fs" />
       </list>
     </option>
   </component>
@@ -141,7 +139,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599502186875</updated>
       <workItem from="1599502207074" duration="240000" />
-      <workItem from="1599503174378" duration="37803000" />
+      <workItem from="1599503174378" duration="39625000" />
     </task>
     <task id="LOCAL-00001" summary="Initalized">
       <created>1599503467543</created>
@@ -234,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599687820217</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Added ConnectionHandler.fs.">
+      <created>1599690593744</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1599690593744</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,7 +286,8 @@
     <MESSAGE value="Updated README.md." />
     <MESSAGE value="Added split result." />
     <MESSAGE value="Finished routes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished routes." />
+    <MESSAGE value="Added ConnectionHandler.fs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added ConnectionHandler.fs." />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="158" width="424" height="490" key="FileChooserDialogImpl" timestamp="1599503854103">
@@ -376,10 +382,10 @@
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="278" y="135" width="800" height="536" key="Rider.ProjectTemplateDialog.Size/0.32.1366.736@0.32.1366.736" timestamp="1599502359493" />
-    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1599687825621">
+    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1599690599817">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1599687825621" />
+    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1599690599817" />
     <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1599682704818">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
