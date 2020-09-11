@@ -48,56 +48,6 @@ module Server =
 
     let routeMap = createRoutesMap routes
 
-
-
-    //    /// Handle a connection.
-//    /// This is designed to be run off of the main thread.
-//    let handleConnection (connection: TcpClient) (handler: (Request -> Response)) =
-//        async {
-//            // For now accept a message, convert to string and send back a message.
-//            logger.Post
-//                { from = "Connection Handler"
-//                  message = "In handler."
-//                  time = DateTime.Now
-//                  ``type`` = Debug }
-//
-//            // Get the network stream
-//            let stream = connection.GetStream()
-//
-//            // Read the incoming request into the buffer.
-//            let! buffer = Streams.readToBuffer stream 255 // |> Async.RunSynchronously
-//
-//            let request = Http.deserializeRequest buffer
-//
-//            // TODO Handle 500.
-//
-//            // Pass too the
-//            // TODO if request is error return 400.
-//            let response =
-//                match request with
-//                | Ok r -> handler r
-//                | Error e ->
-//
-//            // The message text.
-//            let text = Encoding.UTF8.GetString buffer
-//
-//            logger.Post
-//                { from = "Connection Handler"
-//                  message = text
-//                  time = DateTime.Now
-//                  ``type`` = Information }
-//
-//            // Create a basic response.
-//            let response =
-//                Encoding.Default.GetBytes "Hello, world!"
-//
-//            // Write a response.
-//            // For now this will close the connection afterwards.
-//            stream.Write(response, 0, response.Length)
-//
-//            connection.Close()
-//        }
-
     /// The listening loop.
     let rec listen (handler: (TcpClient -> Async<unit>)) =
         // Await a connection.
@@ -111,7 +61,6 @@ module Server =
               ``type`` = Debug }
 
         // Send to a background thread to handle.
-        // **NOTE** logger needs to be passed, not referenced.
         handler connection |> Async.Start |> ignore
 
         logger.Post
@@ -135,9 +84,9 @@ module Server =
                     unauthorized = notFound
                     badRequest = notFound } }
 
-        // "Inject" the route map, the 404 page and logger.
+        // "Inject" the context.
         // The handler can then be passed to the listen loop.
-        let handler = handle context
+        let handler = handleConnection context
 
         logger.Post
             { from = "Main"

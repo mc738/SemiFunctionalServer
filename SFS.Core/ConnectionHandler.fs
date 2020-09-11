@@ -17,7 +17,9 @@ module ConnectionHandler =
         logger: Logger
     }
     
-    let handle (context:Context) (connection: TcpClient) = async {
+    /// Accepts a context and a connection and handles it.
+    /// This is meant to be run on a background thread.
+    let handleConnection (context:Context) (connection: TcpClient) = async {
         
       // For now accept a message, convert to string and send back a message.
         context.logger.Post

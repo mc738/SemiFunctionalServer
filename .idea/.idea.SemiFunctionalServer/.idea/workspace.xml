@@ -21,9 +21,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57946309-cec9-41e3-b4a7-ecb98dac4748" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.Core/Routing.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Routing.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SFS.Core/Server.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Server.fs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,6 +49,7 @@
     <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Routing.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Server.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Logging.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/ConnectionHandler.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Utilities.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Server.fs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -66,8 +65,8 @@
         <option value="$PROJECT_DIR$/SFS.Core/Http.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Utilities.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Routing.fs" />
-        <option value="$PROJECT_DIR$/SFS.Core/Server.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" />
+        <option value="$PROJECT_DIR$/SFS.Core/Server.fs" />
       </list>
     </option>
   </component>
@@ -142,7 +141,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599502186875</updated>
       <workItem from="1599502207074" duration="240000" />
-      <workItem from="1599503174378" duration="41519000" />
+      <workItem from="1599503174378" duration="42013000" />
     </task>
     <task id="LOCAL-00001" summary="Initalized">
       <created>1599503467543</created>
@@ -249,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599774701382</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Refactored to use ConnectionHandler.fs.">
+      <created>1599857237840</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1599857237840</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,7 +304,8 @@
     <MESSAGE value="Finished routes." />
     <MESSAGE value="Added ConnectionHandler.fs." />
     <MESSAGE value="Added pipelines." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added pipelines." />
+    <MESSAGE value="Refactored to use ConnectionHandler.fs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored to use ConnectionHandler.fs." />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="158" width="424" height="490" key="FileChooserDialogImpl" timestamp="1599503854103">
@@ -393,10 +400,10 @@
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="278" y="135" width="800" height="536" key="Rider.ProjectTemplateDialog.Size/0.32.1366.736@0.32.1366.736" timestamp="1599502359493" />
-    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1599774708918">
+    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1599857258119">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1599774708918" />
+    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1599857258119" />
     <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1599682704818">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
