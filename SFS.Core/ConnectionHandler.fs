@@ -1,21 +1,56 @@
 namespace SFS.Core
 
+open System
+open System.Net.Sockets
+open SFS.Core.Utilities
+
 module ConnectionHandler =
         
     open SFS.Core.Http
     open SFS.Core.Logging
-    open SFS.Core.Routing    
+    open SFS.Core.Routing
     
-    let handle (routes: Map<string,Route>) (notFound: Route) (logger:Logger) (request:Request) =
+    
+    type Context = {
+        routes: Map<string,Route>
+        errorRoutes: ErrorRoutes
+        logger: Logger
+    }
+    
+    let handle (context:Context) (connection: TcpClient) = async {
         
-        // Match the route.
-        let route = matchRoute routes notFound request.route
+      // For now accept a message, convert to string and send back a message.
+        context.logger.Post
+            { from = "Connection Handler"
+              message = "In handler."
+              time = DateTime.Now
+              ``type`` = Debug }
+
+        // Get the network stream
+        let stream = connection.GetStream()
+
+        // Read the incoming request into the buffer.
+        let! buffer = Streams.readToBuffer stream 255 // |> Async.RunSynchronously
+
+        let request = deserializeRequest buffer
+        
+        let route =
+            match request with
+            | Ok r ->
+                matchRoute context.routes context.errorRoutes.notFound r.route
+            | Result.Error e ->
+                // TODO Log error.
+                context.errorRoutes.badRequest
+        
+        
+        // Create the response.
+        
+        // Send the response.
+        stream.Write(response, 0, response.Length)
         
         // Create the headers.
         
-        {
-            code = ok
-            headers = Map.empty
-            version = "1.1"
-            body = None
-        }
+        return ()
+    }
+        
+        

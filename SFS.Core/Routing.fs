@@ -32,6 +32,12 @@ module Routing =
 
     and HandlerType = | Static
 
+    and ErrorRoutes =
+        { badRequest: Route
+          notFound: Route
+          unauthorized: Route
+          internalError: Route }
+
     /// Create a static route.
     /// Because the content is static it is
     /// loaded into memory when the route is created.

@@ -10,6 +10,7 @@ module Server =
     open SFS.Core.Utilities
     open SFS.Core.Http
     open System.Net.Sockets
+    open SFS.Core.ConnectionHandler
 
     let logger = Logger()
 
@@ -49,53 +50,56 @@ module Server =
 
 
 
-    /// Handle a connection.
-    /// This is designed to be run off of the main thread.
-    let handleConnection (connection: TcpClient) (handler: (Request -> Response)) =
-        async {
-            // For now accept a message, convert to string and send back a message.
-            logger.Post
-                { from = "Connection Handler"
-                  message = "In handler."
-                  time = DateTime.Now
-                  ``type`` = Debug }
-
-            // Get the network stream
-            let stream = connection.GetStream()
-
-            // Read the incoming request into the buffer.
-            let! buffer = Streams.readToBuffer stream 255 // |> Async.RunSynchronously
-
-            let request = Http.deserializeRequest buffer
-
-            // TODO Handle 500.
-
-            // Pass too the
-            // TODO if request is error return 400.
-            let response = handler request
-
-            // The message text.
-            let text = Encoding.UTF8.GetString buffer
-
-            logger.Post
-                { from = "Connection Handler"
-                  message = text
-                  time = DateTime.Now
-                  ``type`` = Information }
-
-            // Create a basic response.
-            let response =
-                Encoding.Default.GetBytes "Hello, world!"
-
-            // Write a response.
-            // For now this will close the connection afterwards.
-            stream.Write(response, 0, response.Length)
-
-            connection.Close()
-        }
+    //    /// Handle a connection.
+//    /// This is designed to be run off of the main thread.
+//    let handleConnection (connection: TcpClient) (handler: (Request -> Response)) =
+//        async {
+//            // For now accept a message, convert to string and send back a message.
+//            logger.Post
+//                { from = "Connection Handler"
+//                  message = "In handler."
+//                  time = DateTime.Now
+//                  ``type`` = Debug }
+//
+//            // Get the network stream
+//            let stream = connection.GetStream()
+//
+//            // Read the incoming request into the buffer.
+//            let! buffer = Streams.readToBuffer stream 255 // |> Async.RunSynchronously
+//
+//            let request = Http.deserializeRequest buffer
+//
+//            // TODO Handle 500.
+//
+//            // Pass too the
+//            // TODO if request is error return 400.
+//            let response =
+//                match request with
+//                | Ok r -> handler r
+//                | Error e ->
+//
+//            // The message text.
+//            let text = Encoding.UTF8.GetString buffer
+//
+//            logger.Post
+//                { from = "Connection Handler"
+//                  message = text
+//                  time = DateTime.Now
+//                  ``type`` = Information }
+//
+//            // Create a basic response.
+//            let response =
+//                Encoding.Default.GetBytes "Hello, world!"
+//
+//            // Write a response.
+//            // For now this will close the connection afterwards.
+//            stream.Write(response, 0, response.Length)
+//
+//            connection.Close()
+//        }
 
     /// The listening loop.
-    let rec listen (handler: (Request -> Response)) =
+    let rec listen (handler: (TcpClient -> Async<unit>)) =
         // Await a connection.
         // This is blocking.
         let connection = listener.AcceptTcpClient()
@@ -108,9 +112,7 @@ module Server =
 
         // Send to a background thread to handle.
         // **NOTE** logger needs to be passed, not referenced.
-        handleConnection connection handler
-        |> Async.Start
-        |> ignore
+        handler connection |> Async.Start |> ignore
 
         logger.Post
             { from = "Listener"
@@ -124,10 +126,18 @@ module Server =
     /// Start the listening loop and accept incoming requests.
     let start =
 
+        let context =
+            { logger = logger
+              routes = routeMap
+              errorRoutes =
+                  { notFound = notFound
+                    internalError = notFound
+                    unauthorized = notFound
+                    badRequest = notFound } }
+
         // "Inject" the route map, the 404 page and logger.
         // The handler can then be passed to the listen loop.
-        let handler =
-            ConnectionHandler.handle routeMap notFound logger
+        let handler = handle context
 
         logger.Post
             { from = "Main"
