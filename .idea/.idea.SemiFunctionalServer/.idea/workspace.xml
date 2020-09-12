@@ -21,13 +21,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57946309-cec9-41e3-b4a7-ecb98dac4748" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ExampleWebSite/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ExampleWebSite/img/patrik-kernstock-8yN3T4XDJ70-unsplash.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ExampleWebSite/js/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExampleWebSite/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ExampleWebSite/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.Core/Server.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Server.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.Test/UnitTests/Http.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Test/UnitTests/Http.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SFS.Test/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Test/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +36,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="origin/master" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -50,21 +48,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Routing.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Server.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Logging.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/ConnectionHandler.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/ConnectionHandler.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Utilities.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.App/Program.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Http.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Http.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/887264BA-23FF-4D96-9CF0-F196B134B7DB/47/ContentType.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/ConnectionHandler.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Test/IntegrationTests/ConnectionHandler.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/B481E3CF-1007-32AC-B48E-25C13B4FC866/C/async.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/Server.fs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -79,12 +64,12 @@
         <option value="$PROJECT_DIR$/ExampleWebSite/404.html" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.md" />
         <option value="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" />
-        <option value="$PROJECT_DIR$/SFS.Test/README.md" />
         <option value="$PROJECT_DIR$/SFS.Test/IntegrationTests/ConnectionHandler.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Http.fs" />
         <option value="$PROJECT_DIR$/SFS.Test/UnitTests/Http.fs" />
         <option value="$PROJECT_DIR$/ExampleWebSite/index.html" />
         <option value="$PROJECT_DIR$/SFS.Core/Server.fs" />
+        <option value="$PROJECT_DIR$/SFS.Test/README.md" />
       </list>
     </option>
   </component>
