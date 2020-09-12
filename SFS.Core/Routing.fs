@@ -45,7 +45,7 @@ module Routing =
 
         match File.Exists(settings.contentPath) with
         | true ->
-            let data = File.ReadAllBytes settings.contentPath
+            let data = File.ReadAllBytes(settings.contentPath)
             Ok
                 { paths = settings.routePaths
                   contentType = settings.contentType
@@ -80,3 +80,4 @@ module Routing =
         match routes.TryFind route with
         | Some route -> route
         | None -> notFound
+        

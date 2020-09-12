@@ -4,7 +4,7 @@ open System.ComponentModel.Design.Serialization
 open System.Text.Encodings.Web
 
 module ContentTypes =
-    
+
     type ContentType =
         | Html
         | Css
@@ -13,7 +13,7 @@ module ContentTypes =
         | Json
         | JavaScript
         | Xml
-            
+
     let getCTString contentType =
         match contentType with
         | Html -> "text/html"
@@ -22,8 +22,8 @@ module ContentTypes =
         | Gif -> "image/gif"
         | Json -> "application/json"
         | JavaScript -> "text/javascript"
-        | Xml -> "application/xml" 
-    
+        | Xml -> "application/xml"
+
 module Http =
 
     open System.IO
@@ -149,7 +149,7 @@ module Http =
             Result.Error "Unable tp parse first line of request"
 
     let createHeader (header: string) =
-        let split = header.Split(' ')
+        let split = header.Split(':')
         if split.Length > 1 then (split.[0], split.[1]) else (split.[0], String.Empty)
 
     let createHeaders (headers: string list) =
@@ -208,9 +208,44 @@ module Http =
           headers = headers
           body = body }
 
+
+    let serializeHeader headers key value = sprintf "%s%s: %s\r\n" headers key value
+
+    let (+++) a b =
+        Seq.append a b
+    
     /// Serialize a response to a byte array.
-    let serializeResponse (response: Response) = [| 0uy |]
-                                                    
+    let serializeResponse (response: Response) =
+
+        // Bytes for '\r\n\r\n'
+        let split = [| 13uy; 10uy; 13uy; 10uy |]
+
+        // TODO Make this more efficient!
+        let firstLine =
+            sprintf "HTTP/%s %i %s\r\n" response.version response.code.code response.code.name
+
+        let headerText =
+            response.headers |> Map.fold serializeHeader ""
+
+        let body =
+            match response.body with
+            | Some b ->
+                match b with
+                | Binary d -> d
+                | Text d -> Encoding.UTF8.GetBytes(d)
+            | None -> Array.empty
+
+        let flb = Encoding.UTF8.GetBytes(firstLine)
+        let hb = Encoding.UTF8.GetBytes(headerText)
+
+        Seq.append flb hb
+        +++ split
+        +++ body
+        |> Array.ofSeq
+        
+        
+
+
     let requestHandler (logger: Logger) (data: byte array) =
 
         let request = deserializeRequest data

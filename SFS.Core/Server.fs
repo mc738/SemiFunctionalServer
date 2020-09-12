@@ -1,6 +1,7 @@
 namespace SFS.Core
 
 open System.Data
+open System.IO
 open SFS.Core.Routing
 
 module Server =
@@ -25,35 +26,46 @@ module Server =
         seq {
             { contentType = ContentTypes.Html
               routePaths = seq { "/" }
-              contentPath = ""
+              contentPath = "/home/max/Projects/SemiFunctionalServer/ExampleWebSite/index.html"
               routeType = RouteType.Static }
-            { contentType = ContentTypes.Css
-              routePaths = seq { "/css/style.css" }
-              contentPath = ""
-              routeType = RouteType.Static }
-            { contentType = ContentTypes.Css
-              routePaths = seq { "/js/index.js" }
-              contentPath = ""
-              routeType = RouteType.Static }
+//            { contentType = ContentTypes.Css
+//              routePaths = seq { "/css/style.css" }
+//              contentPath = ""
+//              routeType = RouteType.Static }
+//            { contentType = ContentTypes.Css
+//              routePaths = seq { "/js/index.js" }
+//              contentPath = ""
+//              routeType = RouteType.Static }
         }
 
     let notFound =
 
-        let paths = Seq.empty
+        let paths = seq { "NotFound"; "404" }
 
+        let content =
+            File.ReadAllBytes("/home/max/Projects/SemiFunctionalServer/ExampleWebSite/404.html")
+//            |> Binary
+            |> Some
+        
         { paths = paths
           contentType = ContentTypes.Html
           routeType = RouteType.Static
-          content = None }
+          content = content }
 
     let routeMap = createRoutesMap routes
 
+    let i = 0
     /// The listening loop.
-    let rec listen (handler: (TcpClient -> Async<unit>)) =
+    let rec listen (context:Context) =
         // Await a connection.
         // This is blocking.
         let connection = listener.AcceptTcpClient()
 
+        let handler = handleConnection context
+        
+        
+        let routes = match context.routes.["/"].content with Some d -> d | None -> [||]
+        
         logger.Post
             { from = "Listener"
               message = "Connection received."
@@ -70,7 +82,7 @@ module Server =
               ``type`` = Debug }
 
         // Repeat the listen loop.
-        listen (handler)
+        listen (context)
 
     /// Start the listening loop and accept incoming requests.
     let start =
@@ -103,6 +115,6 @@ module Server =
 
         // Pass the listener to `listen` function.
         // This will recursively handle requests.
-        listen (handler) |> ignore
+        listen (context) |> ignore
 
 // TODO Add shutdown.
