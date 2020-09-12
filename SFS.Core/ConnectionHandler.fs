@@ -66,9 +66,19 @@ module ConnectionHandler =
         // Create the response.
         createResponse 200s headers body
 
+    /// Handle a request and return a response.
+    /// This function is designed to be testable against, with out network infrastructure.
+    let handlerRequest context request =
+        let route =
+                match request with
+                | Ok r -> matchRoute context.routes context.errorRoutes.notFound r.route
+                | Result.Error e ->
+                    // TODO Log error.
+                    context.errorRoutes.badRequest
 
-
-
+            // Create the response and serialize it.
+        createResponse route context
+        
     /// Accepts a context and a connection and handles it.
     /// This is meant to be run on a background thread.
     let handleConnection (context: Context) (connection: TcpClient) =
@@ -100,16 +110,9 @@ module ConnectionHandler =
 
             let request = deserializeRequest buffer
 
-            let route =
-                match request with
-                | Ok r -> matchRoute context.routes context.errorRoutes.notFound r.route
-                | Result.Error e ->
-                    // TODO Log error.
-                    context.errorRoutes.badRequest
-
-            // Create the response and serialize it.
-            let response = createResponse route context |> serializeResponse
-
+            // Handle the request, and serialize the response.
+            let response = handlerRequest context request |> serializeResponse
+            
             let test = Encoding.UTF8.GetString(response)
             
             

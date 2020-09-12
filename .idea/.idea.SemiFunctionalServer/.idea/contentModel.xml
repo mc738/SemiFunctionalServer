@@ -31,9 +31,13 @@
         <e p="obj" t="ExcludeRecursive" />
       </e>
       <e p="SFS.Test" t="IncludeRecursive">
+        <e p="IntegrationTests" t="Include">
+          <e p="ConnectionHandler.fs" t="Include" />
+        </e>
         <e p="Program.fs" t="Include" />
         <e p="SFS.Test.fsproj" t="IncludeRecursive" />
         <e p="Tests.fs" t="Include" />
+        <e p="UnitTests" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive" />
       </e>
