@@ -1,11 +1,17 @@
 namespace SFS.Core
 
+open System.Data
+open System.IO
+open SFS.Core.Routing
+
 module Server =
     open System
     open System.Text
     open SFS.Core.Logging
     open SFS.Core.Utilities
+    open SFS.Core.Http
     open System.Net.Sockets
+    open SFS.Core.ConnectionHandler
 
     let logger = Logger()
 
@@ -16,49 +22,54 @@ module Server =
     /// The tcp listener.
     let listener = TcpListener.Create(port)
 
-    /// Handle a connection.
-    /// This is designed to be run off of the main thread.
-    let handleConnection (logger: Logger) (connection: TcpClient) =
-        async {
-            // For now accept a message, convert to string and send back a message.
-            logger.Post
-                { from = "Connection Handler"
-                  message = "In handler."
-                  time = DateTime.Now
-                  ``type`` = Debug }
-
-            // Get the network stream
-            let stream = connection.GetStream()
-
-            // Read the incoming request into the buffer.
-            let! buffer = Streams.readToBuffer stream 255 // |> Async.RunSynchronously
-
-            // The message text.
-            let text = Encoding.UTF8.GetString buffer
-
-            logger.Post
-                { from = "Connection Handler"
-                  message = text
-                  time = DateTime.Now
-                  ``type`` = Information }
-
-            // Create a basic response.
-            let response =
-                Encoding.Default.GetBytes "Hello, world!"
-
-            // Write a response.
-            // For now this will close the connection afterwards.
-            stream.Write(response, 0, response.Length)
-
-            connection.Close()
+    let routes =
+        seq {
+            { contentType = ContentTypes.Html
+              routePaths = seq { "/" }
+              contentPath = "/home/max/Projects/SemiFunctionalServer/ExampleWebSite/index.html"
+              routeType = RouteType.Static }
+            { contentType = ContentTypes.Css
+              routePaths = seq { "/css/style.css" }
+              contentPath = "/home/max/Projects/SemiFunctionalServer/ExampleWebSite/css/style.css"
+              routeType = RouteType.Static }
+            { contentType = ContentTypes.JavaScript
+              routePaths = seq { "/js/index.js" }
+              contentPath = "/home/max/Projects/SemiFunctionalServer/ExampleWebSite/js/index.js"
+              routeType = RouteType.Static }
+            { contentType = ContentTypes.Jpg
+              routePaths = seq { "/img/patrik-kernstock-8yN3T4XDJ70-unsplash.jpg" }
+              contentPath = "/home/max/Projects/SemiFunctionalServer/ExampleWebSite/img/patrik-kernstock-8yN3T4XDJ70-unsplash.jpg"
+              routeType = RouteType.Static }
         }
 
+    let notFound =
+
+        let paths = seq { "NotFound"; "404" }
+
+        let content =
+            File.ReadAllBytes("/home/max/Projects/SemiFunctionalServer/ExampleWebSite/404.html")
+//            |> Binary
+            |> Some
+        
+        { paths = paths
+          contentType = ContentTypes.Html
+          routeType = RouteType.Static
+          content = content }
+
+    let routeMap = createRoutesMap routes
+
+    let i = 0
     /// The listening loop.
-    let rec listen () =
+    let rec listen (context:Context) =
         // Await a connection.
         // This is blocking.
         let connection = listener.AcceptTcpClient()
 
+        let handler = handleConnection context
+        
+        
+//        let routes = match context.routes.["/"].content with Some d -> d | None -> [||]
+        
         logger.Post
             { from = "Listener"
               message = "Connection received."
@@ -66,10 +77,7 @@ module Server =
               ``type`` = Debug }
 
         // Send to a background thread to handle.
-        // **NOTE** logger needs to be passed, not referenced.
-        handleConnection logger connection
-        |> Async.Start
-        |> ignore
+        handler connection |> Async.Start |> ignore
 
         logger.Post
             { from = "Listener"
@@ -78,10 +86,23 @@ module Server =
               ``type`` = Debug }
 
         // Repeat the listen loop.
-        listen ()
+        listen (context)
 
     /// Start the listening loop and accept incoming requests.
     let start =
+
+        let context =
+            { logger = logger
+              routes = routeMap
+              errorRoutes =
+                  { notFound = notFound
+                    internalError = notFound
+                    unauthorized = notFound
+                    badRequest = notFound } }
+
+        // "Inject" the context.
+        // The handler can then be passed to the listen loop.
+        let handler = handleConnection context
 
         logger.Post
             { from = "Main"
@@ -98,6 +119,6 @@ module Server =
 
         // Pass the listener to `listen` function.
         // This will recursively handle requests.
-        listen () |> ignore
+        listen (context) |> ignore
 
 // TODO Add shutdown.

@@ -20,7 +20,10 @@
         <e p="obj" t="ExcludeRecursive" />
       </e>
       <e p="SFS.Core" t="IncludeRecursive">
+        <e p="ConnectionHandler.fs" t="Include" />
+        <e p="Http.fs" t="Include" />
         <e p="Logging.fs" t="Include" />
+        <e p="Routing.fs" t="Include" />
         <e p="SFS.Core.fsproj" t="IncludeRecursive" />
         <e p="Server.fs" t="Include" />
         <e p="Utilities.fs" t="Include" />
@@ -28,9 +31,16 @@
         <e p="obj" t="ExcludeRecursive" />
       </e>
       <e p="SFS.Test" t="IncludeRecursive">
+        <e p="IntegrationTests" t="Include">
+          <e p="ConnectionHandler.fs" t="Include" />
+        </e>
         <e p="Program.fs" t="Include" />
+        <e p="README.md" t="Include" />
         <e p="SFS.Test.fsproj" t="IncludeRecursive" />
         <e p="Tests.fs" t="Include" />
+        <e p="UnitTests" t="Include">
+          <e p="Http.fs" t="Include" />
+        </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive" />
       </e>
