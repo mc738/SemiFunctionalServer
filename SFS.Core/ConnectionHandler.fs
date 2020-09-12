@@ -84,7 +84,7 @@ module ConnectionHandler =
             let stream = connection.GetStream()
 
             // Read the incoming request into the buffer.
-            let! buffer = Streams.readToBuffer stream 255 // |> Async.RunSynchronously
+            let! buffer = Streams.readToBuffer stream 1056 // |> Async.RunSynchronously
 
             let request = deserializeRequest buffer
 
