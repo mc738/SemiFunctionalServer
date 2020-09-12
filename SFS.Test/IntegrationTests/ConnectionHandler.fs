@@ -9,7 +9,7 @@ open SFS.Core.Logging
 module ConnectionHandler =
     
     [<TestClass>]
-    type TestClass () =
+    type ConnectionHandlerTests () =
 
         let createRouteEmp =
             { paths = Seq.empty

@@ -122,7 +122,7 @@ module Http =
         | _ when len <= i -> Result.Error "Out of range."
         | _ when i - 3 >= 0 ->
             if checkForSplit data.[i] data.[(i - 1)] data.[(i - 2)] data.[(i - 3)]
-            then Ok(i)
+            then Ok(i + 1)
             else findSplitIndex data (i + 1)
         | _ -> findSplitIndex data (i + 1)
 
@@ -146,10 +146,10 @@ module Http =
             let version = split.[2]
             Ok(verb, route, version)
         else
-            Result.Error "Unable tp parse first line of request"
+            Result.Error "Unable to parse first line of request"
 
     let createHeader (header: string) =
-        let split = header.Split(':')
+        let split = header.Split(": ")
         if split.Length > 1 then (split.[0], split.[1]) else (split.[0], String.Empty)
 
     let createHeaders (headers: string list) =
@@ -187,7 +187,8 @@ module Http =
                 if (b.Length > 0) then Some(Binary b) else None
 
             // The header can be converted to text from bytes now.
-            let head = Encoding.Default.GetString h
+            // Remove the last bits to get rid of trailing `\r\n\r\n`.
+            let head = Encoding.Default.GetString h.[0..(h.Length - 5)]
 
             createRequest body head
 

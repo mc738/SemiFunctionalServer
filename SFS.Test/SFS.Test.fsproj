@@ -9,9 +9,10 @@
 
     <ItemGroup>
         <Compile Include="Tests.fs" />
-        <Folder Include="UnitTests" />
+        <Compile Include="UnitTests\Http.fs" />
         <Compile Include="IntegrationTests\ConnectionHandler.fs" />
         <Compile Include="Program.fs" />
+        <Content Include="README.md" />
     </ItemGroup>
 
     <ItemGroup>
