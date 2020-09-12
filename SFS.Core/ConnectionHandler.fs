@@ -21,6 +21,7 @@ module ConnectionHandler =
     let standardHeaders =
         seq {
             "Server", "SFS"
+            "Connection", "close"
         }
 
 
@@ -83,6 +84,17 @@ module ConnectionHandler =
             // Get the network stream
             let stream = connection.GetStream()
 
+            // Rec loop to make sure we don't read into buffer before data is available.
+            // Github issue: `Issue with request buffer #4`
+            let rec waitForData() =
+                if stream.DataAvailable then
+                    ()
+                else
+                    Async.Sleep 100 |> ignore
+                    waitForData()
+            
+            waitForData()
+            
             // Read the incoming request into the buffer.
             let! buffer = Streams.readToBuffer stream 1056 // |> Async.RunSynchronously
 
@@ -105,6 +117,8 @@ module ConnectionHandler =
             stream.Write(response, 0, response.Length)
 
             // Create the headers.
+            
+            connection.Close()
 
             return ()
         }

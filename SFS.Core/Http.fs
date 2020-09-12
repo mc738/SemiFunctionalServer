@@ -218,7 +218,7 @@ module Http =
     let serializeResponse (response: Response) =
 
         // Bytes for '\r\n\r\n'
-        let split = [| 13uy; 10uy; 13uy; 10uy |]
+        let split = [| 13uy; 10uy |]
 
         // TODO Make this more efficient!
         let firstLine =
