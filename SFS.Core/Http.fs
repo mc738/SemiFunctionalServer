@@ -187,7 +187,8 @@ module Http =
                 if (b.Length > 0) then Some(Binary b) else None
 
             // The header can be converted to text from bytes now.
-            // Remove the last bits to get rid of trailing `\r\n\r\n`.
+            // Remove the last bits to get rid of trailing `\r\n\r\n` (5).
+            // TODO This feels like a bit of a hack, find a better solution.
             let head = Encoding.Default.GetString h.[0..(h.Length - 5)]
 
             createRequest body head
