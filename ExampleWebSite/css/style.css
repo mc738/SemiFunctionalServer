@@ -1,0 +1,116 @@
+:root {
+    --fg: #f8f8f2;
+    --bg: #282a36;
+    --code-bg: #44475a;
+    --code-fg: #bd93f9;
+
+    --pink: #ff79c6;
+    --green: #50fa7b;
+
+    --padding: 1rem;
+    --half-padding: calc(var(--padding) / 2);
+}
+
+
+* {
+    border: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: var(--fg);
+    font-family: sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, small, code, li {
+    padding-top: var(--half-padding);
+    padding-bottom: var(--half-padding);
+}
+
+h1, h1 code {
+    font-size: 3rem;
+}
+
+h2, h2 code {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--pink);
+}
+
+body {
+    overflow-x: hidden;
+}
+
+ul, ol {
+    padding-left: 1rem;
+}
+
+#banner {
+    background-image: url("../img/patrik-kernstock-8yN3T4XDJ70-unsplash.jpg");
+    height: 50vh;
+    width: 100vw;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+
+header * {
+    color: var(--pink);
+    padding: var(--padding);
+}
+
+
+
+main {
+    background-color: var(--bg);
+}
+
+.block {
+    padding: 1rem;
+}
+
+#main-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 50vh;
+    width: 100%;
+}
+
+#main-block .block {
+
+}
+
+.grid-3 {
+    display: flex;
+    height: 50vh;
+    width: 100%;
+}
+
+.grid-3 .block {
+    width: calc(100% / 3);
+    height: 100%;
+}
+
+
+.content {
+    height: 70vh;
+    
+}
+
+footer {
+    background-color: var(--code-bg);
+    height: 30vh;
+}

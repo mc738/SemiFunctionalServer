@@ -28,14 +28,18 @@ module Server =
               routePaths = seq { "/" }
               contentPath = "/home/max/Projects/SemiFunctionalServer/ExampleWebSite/index.html"
               routeType = RouteType.Static }
-//            { contentType = ContentTypes.Css
-//              routePaths = seq { "/css/style.css" }
-//              contentPath = ""
-//              routeType = RouteType.Static }
-//            { contentType = ContentTypes.Css
-//              routePaths = seq { "/js/index.js" }
-//              contentPath = ""
-//              routeType = RouteType.Static }
+            { contentType = ContentTypes.Css
+              routePaths = seq { "/css/style.css" }
+              contentPath = "/home/max/Projects/SemiFunctionalServer/ExampleWebSite/css/style.css"
+              routeType = RouteType.Static }
+            { contentType = ContentTypes.JavaScript
+              routePaths = seq { "/js/index.js" }
+              contentPath = "/home/max/Projects/SemiFunctionalServer/ExampleWebSite/js/index.js"
+              routeType = RouteType.Static }
+            { contentType = ContentTypes.Jpg
+              routePaths = seq { "/img/patrik-kernstock-8yN3T4XDJ70-unsplash.jpg" }
+              contentPath = "/home/max/Projects/SemiFunctionalServer/ExampleWebSite/img/patrik-kernstock-8yN3T4XDJ70-unsplash.jpg"
+              routeType = RouteType.Static }
         }
 
     let notFound =
@@ -64,7 +68,7 @@ module Server =
         let handler = handleConnection context
         
         
-        let routes = match context.routes.["/"].content with Some d -> d | None -> [||]
+//        let routes = match context.routes.["/"].content with Some d -> d | None -> [||]
         
         logger.Post
             { from = "Listener"

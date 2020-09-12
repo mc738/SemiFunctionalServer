@@ -92,9 +92,6 @@ module Http =
             
             let actual = serializeResponse responseActual
             
-            let t1 = Encoding.UTF8.GetString actual
-            let t2 = Encoding.UTF8.GetString expected
-            
             // ~~Not sure why this fails, the strings and arrays are the same?~~
             // Was failing because of capital `k` in actual -> "OK".
             // Changed now, this shouldn't actually affect the system.
