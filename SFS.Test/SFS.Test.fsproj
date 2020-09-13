@@ -10,6 +10,7 @@
     <ItemGroup>
         <Compile Include="Tests.fs" />
         <Compile Include="UnitTests\Http.fs" />
+        <Compile Include="UnitTests\WebSockets.fs" />
         <Compile Include="IntegrationTests\ConnectionHandler.fs" />
         <Compile Include="Program.fs" />
         <Content Include="README.md" />

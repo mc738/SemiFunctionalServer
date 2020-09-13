@@ -10,20 +10,6 @@ module Http =
 
     [<TestClass>]
     type TestClass () =
-//
-//           type Request =
-//        { verb: Verb
-//          route: string
-//          version: string
-//          headers: Map<string, string>
-//          body: Body option }
-//
-//    and Response =
-//        { code: StatusCode
-//          version: string
-//          headers: Map<string, string>
-//          body: Body option }
-        
         
         let requestString = "GET /hello.htm HTTP/1.1\r\nUser-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)\r\nHost: www.tutorialspoint.com\r\nAccept-Language: en-us\r\nAccept-Encoding: gzip, deflate\r\nConnection: Keep-Alive\r\n\r\n" 
     
