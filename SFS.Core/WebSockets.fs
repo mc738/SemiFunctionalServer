@@ -1,14 +1,100 @@
 namespace SFS.Core
 
-open System
-open System.Text
-open SFS.Core.Http
-open SFS.Core.Utilities
+open SFS.Core.Utilities.Messaging
 
 module WebSockets =
 
+    open System
+    open System.Text
+    open System.Threading.Channels
+    open SFS.Core.Http
+    open SFS.Core.Utilities
     open Hashing
 
+    type WebSocketMessage =
+        | Binary of byte array
+        | Text of string
+        | NewSubscription of Subscription
+        
+    /// This represents a client connection, however it is separate for network infrastructure.
+    /// This means it doesn't rely on a network for testing.  
+    and Subscription = {
+        ref: Guid
+        writer: Writer<WebSocketMessage>
+        started: DateTime
+    }
+    and ClientConnectionDetails = {
+        get: (unit -> WebSocketMessage option)
+        post: (WebSocketMessage -> unit)
+    }
+        
+    type WebSocketChannel(name: string) =
+
+        let write message (clientConnection: Subscription) = clientConnection.writer.Post message
+
+        let handler (message: WebSocketMessage) (state: Map<Guid,Subscription>) =
+            // Handle incoming message.
+            let writer = write message
+            
+            let newState =
+                match message with
+                | Text t ->
+                    // Test - echo response.
+                    state |> Map.map (fun k v -> writer v) |> ignore // Ignore for now.
+                    state
+                | Binary b ->
+                    state
+                | NewSubscription s ->
+                    // Add the subscription to a new state.
+                    Map.add s.ref s state          
+                
+            true, newState
+
+        let listener =
+            let state: Map<Guid,Subscription> = Map.empty
+            Messaging.createMBPWithState<WebSocketMessage, Map<Guid,Subscription>> state handler
+        
+        member this.Post(message) =
+            listener.Post message
+            
+        /// Get client connections details for the channel.
+        member this.GetClientConnectionDetails (reader) =
+            let post = this.Post
+            let get = reader
+            ()
+
+
+    // A wrapper around ChannelReader.TryGet.
+    // To allow for checking with in a cycle.
+    let createGet (reader:Reader<WebSocketMessage>) () =
+        let mutable d = ref (Text "")
+        
+        match reader.TryGet d with
+        | Some v -> Some !v
+        | None -> None
+
+    let createSubscription (channel:WebSocketChannel) =
+        let id = Guid.NewGuid()
+        
+        let (reader,writer) = createChannel<WebSocketMessage>
+        
+        let subscription = {
+            ref = id
+            writer = writer
+            started = DateTime.Now
+        }
+        
+        let get = createGet reader
+       
+        let clientConnection = {
+            get = get
+            post = channel.Post
+        }
+        
+        (subscription, clientConnection)
+        
+        
+    
     /// Standard WebSockets guid.
     let wsGuid = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 
@@ -17,7 +103,6 @@ module WebSockets =
         Encoding.UTF8.GetBytes key
         |> sha1
         |> System.Convert.ToBase64String
-
 
     let createWSHttpResponse (request: Request) =
         let key = getHeader request "Sec-WebSocket-Key"
@@ -98,15 +183,15 @@ module WebSockets =
             let message = decode maskBytes newOffset data
             Ok message
 
-    let handlerWrite (data : byte array) =
+    let handlerWrite (data: byte array) =
         // TODO handle bigger data (i.e. split it).
         let fin = 0x80uy
         let byte1 = fin ||| 1uy
         let mask = 0uy // No mask, not client. 0x80 for client
-        
+
         /// TODO this only supports short message so far.
-        let byte2 = mask ||| (byte)data.Length
-        
+        let byte2 = mask ||| (byte) data.Length
+
         let fBytes = [| byte1; byte2 |]
-        
+
         Array.append fBytes data

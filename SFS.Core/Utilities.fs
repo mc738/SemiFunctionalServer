@@ -65,6 +65,12 @@ module Messaging =
                 }
 
             loop ()
+            
+        member this.TryGet (d) =
+           match reader.TryRead(d) with
+           | true -> Some d
+           | false -> None
+           // let item = reader.TryRead()
 
     /// A wrapper class for `System.Threading.Channels.ChannelWriter`
     type Writer<'a>(writer: ChannelWriter<'a>) =
@@ -75,6 +81,23 @@ module Messaging =
             | true -> Ok()
             | false -> Error()
 
+    /// Create a mail box processor of type 'a and state of 'b.
+    let createMBPWithState<'a,'b> (state:'b) handler =
+        MailboxProcessor<'a>
+            .Start(fun inbox ->
+                  let rec loop (state) =
+                      async {
+
+                          let! item = inbox.Receive()
+
+                          let (cont,newState) = handler item state
+
+                          if cont then return! loop (newState)
+                      }
+
+                  loop (state))
+    
+    
     /// Create a mail box processor of type 'a
     /// and assign it a handler for incoming items.
     let createMBP<'a> handler =
@@ -91,6 +114,7 @@ module Messaging =
                       }
 
                   loop ())
+   
 
     /// Create a channel, and get it's reader and writer.
     let createChannel<'a> =
