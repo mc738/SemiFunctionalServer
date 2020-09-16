@@ -34,7 +34,7 @@ module WebSockets =
 
         let handler (message: WebSocketMessage) (state: Map<Guid,Subscription>) =
             // Handle incoming message.
-            let writer = write message
+            let writer = write (Text "Hello From Server!")
             
             let newState =
                 match message with
@@ -46,7 +46,9 @@ module WebSockets =
                     state
                 | NewSubscription s ->
                     // Add the subscription to a new state.
-                    Map.add s.ref s state          
+                    Map.add s.ref s state
+                    
+            Async.Sleep 500 |> ignore
                 
             true, newState
 
@@ -133,10 +135,12 @@ module WebSockets =
     /// Handle the `msglen` value and return a length and offset.
     let handleMsgLen (msgLen: byte) (data: byte array) =
         match msgLen with
+        | d when d < 126uy ->
+            let v : uint16 = uint16 d
+            (v, 2)
         | 126uy ->
             let length =
                 BitConverter.ToUInt16([| data.[2]; data.[3] |], 0)
-
             (length, 4)
         | _ -> (0us, 0)
 

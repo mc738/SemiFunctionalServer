@@ -22,8 +22,10 @@
   <component name="ChangeListManager">
     <list default="true" id="57946309-cec9-41e3-b4a7-ecb98dac4748" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleWebSite/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ExampleWebSite/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleWebSite/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ExampleWebSite/js/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.Core/Server.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Server.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SFS.Core/WebSockets.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/WebSockets.fs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,16 +66,17 @@
         <option value="$PROJECT_DIR$/ExampleWebSite/404.html" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.md" />
         <option value="$PROJECT_DIR$/SFS.Test/IntegrationTests/ConnectionHandler.fs" />
-        <option value="$PROJECT_DIR$/ExampleWebSite/index.html" />
         <option value="$PROJECT_DIR$/SFS.Test/README.md" />
         <option value="$PROJECT_DIR$/SFS.Test/UnitTests/Http.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Http.fs" />
         <option value="$PROJECT_DIR$/SFS.Test/UnitTests/WebSockets.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Logging.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Utilities.fs" />
-        <option value="$PROJECT_DIR$/SFS.Core/WebSockets.fs" />
-        <option value="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Server.fs" />
+        <option value="$PROJECT_DIR$/ExampleWebSite/js/index.js" />
+        <option value="$PROJECT_DIR$/ExampleWebSite/index.html" />
+        <option value="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" />
+        <option value="$PROJECT_DIR$/SFS.Core/WebSockets.fs" />
       </list>
     </option>
   </component>
@@ -154,7 +157,7 @@
       <workItem from="1599502207074" duration="240000" />
       <workItem from="1599503174378" duration="66244000" />
       <workItem from="1599989412226" duration="23887000" />
-      <workItem from="1600283025074" duration="4626000" />
+      <workItem from="1600283025074" duration="9145000" />
     </task>
     <task id="LOCAL-00001" summary="Initalized">
       <created>1599503467543</created>
@@ -345,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600285317234</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Finished ws connection handler.">
+      <created>1600287911979</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1600287911979</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,7 +390,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Test commit." />
     <MESSAGE value="Adding Logging.fs and Utilities.fs." />
     <MESSAGE value="Fixed Logging.fs." />
     <MESSAGE value="Removed Library.fs." />
@@ -405,7 +414,8 @@
     <MESSAGE value="Added WS handshake." />
     <MESSAGE value="Finished basic WebSockets.fs and added tests." />
     <MESSAGE value="Added subscription and client connection details." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added subscription and client connection details." />
+    <MESSAGE value="Finished ws connection handler." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished ws connection handler." />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="158" width="424" height="490" key="FileChooserDialogImpl" timestamp="1600007210970">
@@ -416,86 +426,86 @@
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="496" y="300" width="373" height="206" key="Github.ShareDialog/0.32.1366.736@0.32.1366.736" timestamp="1599503534372" />
-    <state width="1320" height="171" key="GridCell.Tab.0.bottom" timestamp="1599935452956">
+    <state width="1320" height="217" key="GridCell.Tab.0.bottom" timestamp="1600297368697">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="171" key="GridCell.Tab.0.bottom/0.32.1366.736@0.32.1366.736" timestamp="1599935452956" />
-    <state width="1320" height="171" key="GridCell.Tab.0.center" timestamp="1599935452955">
+    <state width="1320" height="217" key="GridCell.Tab.0.bottom/0.32.1366.736@0.32.1366.736" timestamp="1600297368697" />
+    <state width="1320" height="217" key="GridCell.Tab.0.center" timestamp="1600297368696">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="171" key="GridCell.Tab.0.center/0.32.1366.736@0.32.1366.736" timestamp="1599935452955" />
-    <state width="1320" height="171" key="GridCell.Tab.0.left" timestamp="1599935452955">
+    <state width="1320" height="217" key="GridCell.Tab.0.center/0.32.1366.736@0.32.1366.736" timestamp="1600297368696" />
+    <state width="1320" height="217" key="GridCell.Tab.0.left" timestamp="1600297368692">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="171" key="GridCell.Tab.0.left/0.32.1366.736@0.32.1366.736" timestamp="1599935452955" />
-    <state width="1320" height="171" key="GridCell.Tab.0.right" timestamp="1599935452956">
+    <state width="1320" height="217" key="GridCell.Tab.0.left/0.32.1366.736@0.32.1366.736" timestamp="1600297368692" />
+    <state width="1320" height="217" key="GridCell.Tab.0.right" timestamp="1600297368696">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="171" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1599935452956" />
-    <state width="1320" height="217" key="GridCell.Tab.1.bottom" timestamp="1599935377426">
+    <state width="1320" height="217" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1600297368696" />
+    <state width="1320" height="217" key="GridCell.Tab.1.bottom" timestamp="1600297392779">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.1.bottom/0.32.1366.736@0.32.1366.736" timestamp="1599935377426" />
-    <state width="1320" height="217" key="GridCell.Tab.1.center" timestamp="1599935377426">
+    <state width="1320" height="217" key="GridCell.Tab.1.bottom/0.32.1366.736@0.32.1366.736" timestamp="1600297392779" />
+    <state width="1320" height="217" key="GridCell.Tab.1.center" timestamp="1600297392779">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.1.center/0.32.1366.736@0.32.1366.736" timestamp="1599935377426" />
-    <state width="1320" height="217" key="GridCell.Tab.1.left" timestamp="1599935377426">
+    <state width="1320" height="217" key="GridCell.Tab.1.center/0.32.1366.736@0.32.1366.736" timestamp="1600297392779" />
+    <state width="1320" height="217" key="GridCell.Tab.1.left" timestamp="1600297392778">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.1.left/0.32.1366.736@0.32.1366.736" timestamp="1599935377426" />
-    <state width="1320" height="217" key="GridCell.Tab.1.right" timestamp="1599935377426">
+    <state width="1320" height="217" key="GridCell.Tab.1.left/0.32.1366.736@0.32.1366.736" timestamp="1600297392778" />
+    <state width="1320" height="217" key="GridCell.Tab.1.right" timestamp="1600297392779">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.1.right/0.32.1366.736@0.32.1366.736" timestamp="1599935377426" />
-    <state width="1320" height="217" key="GridCell.Tab.2.bottom" timestamp="1599935377426">
+    <state width="1320" height="217" key="GridCell.Tab.1.right/0.32.1366.736@0.32.1366.736" timestamp="1600297392779" />
+    <state width="1320" height="217" key="GridCell.Tab.2.bottom" timestamp="1600297368092">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.2.bottom/0.32.1366.736@0.32.1366.736" timestamp="1599935377426" />
-    <state width="1320" height="217" key="GridCell.Tab.2.center" timestamp="1599935377426">
+    <state width="1320" height="217" key="GridCell.Tab.2.bottom/0.32.1366.736@0.32.1366.736" timestamp="1600297368092" />
+    <state width="1320" height="217" key="GridCell.Tab.2.center" timestamp="1600297368090">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.2.center/0.32.1366.736@0.32.1366.736" timestamp="1599935377426" />
-    <state width="1320" height="217" key="GridCell.Tab.2.left" timestamp="1599935377426">
+    <state width="1320" height="217" key="GridCell.Tab.2.center/0.32.1366.736@0.32.1366.736" timestamp="1600297368090" />
+    <state width="1320" height="217" key="GridCell.Tab.2.left" timestamp="1600297368090">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.2.left/0.32.1366.736@0.32.1366.736" timestamp="1599935377426" />
-    <state width="1320" height="217" key="GridCell.Tab.2.right" timestamp="1599935377426">
+    <state width="1320" height="217" key="GridCell.Tab.2.left/0.32.1366.736@0.32.1366.736" timestamp="1600297368090" />
+    <state width="1320" height="217" key="GridCell.Tab.2.right" timestamp="1600297368091">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.2.right/0.32.1366.736@0.32.1366.736" timestamp="1599935377426" />
-    <state width="1320" height="217" key="GridCell.Tab.3.bottom" timestamp="1599935377428">
+    <state width="1320" height="217" key="GridCell.Tab.2.right/0.32.1366.736@0.32.1366.736" timestamp="1600297368091" />
+    <state width="1320" height="217" key="GridCell.Tab.3.bottom" timestamp="1600297368095">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.3.bottom/0.32.1366.736@0.32.1366.736" timestamp="1599935377428" />
-    <state width="1320" height="217" key="GridCell.Tab.3.center" timestamp="1599935377428">
+    <state width="1320" height="217" key="GridCell.Tab.3.bottom/0.32.1366.736@0.32.1366.736" timestamp="1600297368095" />
+    <state width="1320" height="217" key="GridCell.Tab.3.center" timestamp="1600297368093">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.3.center/0.32.1366.736@0.32.1366.736" timestamp="1599935377428" />
-    <state width="1320" height="217" key="GridCell.Tab.3.left" timestamp="1599935377427">
+    <state width="1320" height="217" key="GridCell.Tab.3.center/0.32.1366.736@0.32.1366.736" timestamp="1600297368093" />
+    <state width="1320" height="217" key="GridCell.Tab.3.left" timestamp="1600297368092">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.3.left/0.32.1366.736@0.32.1366.736" timestamp="1599935377427" />
-    <state width="1320" height="217" key="GridCell.Tab.3.right" timestamp="1599935377428">
+    <state width="1320" height="217" key="GridCell.Tab.3.left/0.32.1366.736@0.32.1366.736" timestamp="1600297368092" />
+    <state width="1320" height="217" key="GridCell.Tab.3.right" timestamp="1600297368093">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.3.right/0.32.1366.736@0.32.1366.736" timestamp="1599935377428" />
-    <state width="1320" height="217" key="GridCell.Tab.4.bottom" timestamp="1599935377429">
+    <state width="1320" height="217" key="GridCell.Tab.3.right/0.32.1366.736@0.32.1366.736" timestamp="1600297368093" />
+    <state width="1320" height="217" key="GridCell.Tab.4.bottom" timestamp="1600297368096">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.4.bottom/0.32.1366.736@0.32.1366.736" timestamp="1599935377429" />
-    <state width="1320" height="217" key="GridCell.Tab.4.center" timestamp="1599935377428">
+    <state width="1320" height="217" key="GridCell.Tab.4.bottom/0.32.1366.736@0.32.1366.736" timestamp="1600297368096" />
+    <state width="1320" height="217" key="GridCell.Tab.4.center" timestamp="1600297368095">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.4.center/0.32.1366.736@0.32.1366.736" timestamp="1599935377428" />
-    <state width="1320" height="217" key="GridCell.Tab.4.left" timestamp="1599935377428">
+    <state width="1320" height="217" key="GridCell.Tab.4.center/0.32.1366.736@0.32.1366.736" timestamp="1600297368095" />
+    <state width="1320" height="217" key="GridCell.Tab.4.left" timestamp="1600297368095">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.4.left/0.32.1366.736@0.32.1366.736" timestamp="1599935377428" />
-    <state width="1320" height="217" key="GridCell.Tab.4.right" timestamp="1599935377429">
+    <state width="1320" height="217" key="GridCell.Tab.4.left/0.32.1366.736@0.32.1366.736" timestamp="1600297368095" />
+    <state width="1320" height="217" key="GridCell.Tab.4.right" timestamp="1600297368095">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1320" height="217" key="GridCell.Tab.4.right/0.32.1366.736@0.32.1366.736" timestamp="1599935377429" />
+    <state width="1320" height="217" key="GridCell.Tab.4.right/0.32.1366.736@0.32.1366.736" timestamp="1600297368095" />
     <state x="278" y="135" width="800" height="536" key="Rider.ProjectTemplateDialog.Size" timestamp="1600007188226">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
@@ -522,6 +532,62 @@
     <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.32.1366.736@0.32.1366.736" timestamp="1600284108558" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs</url>
+          <line>111</line>
+          <properties documentPath="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" initialLine="111">
+            <startOffsets>
+              <option value="3458" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3490" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs</url>
+          <line>100</line>
+          <properties documentPath="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" initialLine="100">
+            <startOffsets>
+              <option value="3078" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3098" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs</url>
+          <line>103</line>
+          <properties documentPath="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" initialLine="103">
+            <startOffsets>
+              <option value="3206" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3208" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/SFS.Core/WebSockets.fs</url>
+          <line>136</line>
+          <properties documentPath="$PROJECT_DIR$/SFS.Core/WebSockets.fs" initialLine="136">
+            <startOffsets>
+              <option value="4108" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4125" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Frame#SFS.Core.Server.listen" memberName="context" />

@@ -95,24 +95,26 @@ module ConnectionHandler =
                 if connection.DataAvailable then
                     let! data = Streams.readToBuffer connection 256
                     
-                    let test = Encoding.UTF8.GetString data
-                    
-                    ccd.post (Text test)
-                    
-                    ()
+                    match handleRead data with
+                    | Ok d ->
+                        let test = Encoding.UTF8.GetString (d |> Array.ofSeq)
+                        ccd.post (Text test)
+                    | Result.Error e ->
+                        // TODO log error.
+                        ()
         
                 match ccd.get () with
                 | Some message ->
 
                     match message with
                     | Text t ->
-                        let d = Encoding.UTF8.GetBytes t
+                        let d = handlerWrite (Encoding.UTF8.GetBytes t)
                         connection.Write(d, 0, d.Length)
                     | _ -> ()
                 | None -> ()
                 
                 // Try to read from channel.
-                
+                Async.Sleep 100 |> ignore
                             
                 return! handlerLoop (ccd: ClientConnectionDetails)
             }
@@ -172,7 +174,7 @@ module ConnectionHandler =
             // TODO handle case insensitivity.
             let upgrade = getHeader r "Upgrade"
             match upgrade with
-            | Some "websockets" -> handleWebSockets context connection r
+            | Some "websocket" -> handleWebSockets context connection r
             | Some _ -> handleHttp context connection r
             | None -> handleHttp context connection r
         | Result.Error e ->
