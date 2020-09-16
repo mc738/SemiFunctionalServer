@@ -23,8 +23,7 @@
     <list default="true" id="57946309-cec9-41e3-b4a7-ecb98dac4748" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SemiFunctionalServer/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.Core/Utilities.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Utilities.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SFS.Core/WebSockets.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/WebSockets.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SFS.Core/Server.fs" beforeDir="false" afterPath="$PROJECT_DIR$/SFS.Core/Server.fs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +50,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/887264BA-23FF-4D96-9CF0-F196B134B7DB/47/ContentType.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/max/Projects/SemiFunctionalServer/SFS.Core/ConnectionHandler.fs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/B481E3CF-1007-32AC-B48E-25C13B4FC866/C/async.fs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -65,15 +65,15 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.md" />
         <option value="$PROJECT_DIR$/SFS.Test/IntegrationTests/ConnectionHandler.fs" />
         <option value="$PROJECT_DIR$/ExampleWebSite/index.html" />
-        <option value="$PROJECT_DIR$/SFS.Core/Server.fs" />
         <option value="$PROJECT_DIR$/SFS.Test/README.md" />
         <option value="$PROJECT_DIR$/SFS.Test/UnitTests/Http.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Http.fs" />
         <option value="$PROJECT_DIR$/SFS.Test/UnitTests/WebSockets.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Logging.fs" />
-        <option value="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/Utilities.fs" />
         <option value="$PROJECT_DIR$/SFS.Core/WebSockets.fs" />
+        <option value="$PROJECT_DIR$/SFS.Core/ConnectionHandler.fs" />
+        <option value="$PROJECT_DIR$/SFS.Core/Server.fs" />
       </list>
     </option>
   </component>
@@ -154,7 +154,7 @@
       <workItem from="1599502207074" duration="240000" />
       <workItem from="1599503174378" duration="66244000" />
       <workItem from="1599989412226" duration="23887000" />
-      <workItem from="1600283025074" duration="2126000" />
+      <workItem from="1600283025074" duration="4626000" />
     </task>
     <task id="LOCAL-00001" summary="Initalized">
       <created>1599503467543</created>
@@ -338,7 +338,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600025124580</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Added subscription and client connection details.">
+      <created>1600285317234</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1600285317234</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -373,7 +380,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Added Server.fs." />
     <MESSAGE value="Test commit." />
     <MESSAGE value="Adding Logging.fs and Utilities.fs." />
     <MESSAGE value="Fixed Logging.fs." />
@@ -398,7 +404,8 @@
     <MESSAGE value="Updated test README.md." />
     <MESSAGE value="Added WS handshake." />
     <MESSAGE value="Finished basic WebSockets.fs and added tests." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished basic WebSockets.fs and added tests." />
+    <MESSAGE value="Added subscription and client connection details." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added subscription and client connection details." />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="158" width="424" height="490" key="FileChooserDialogImpl" timestamp="1600007210970">
@@ -497,10 +504,10 @@
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="100" y="132" width="1166" height="536" key="VCS.FileHistoryDialog/0.32.1366.736@0.32.1366.736" timestamp="1599919787372" />
-    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1600025130357">
+    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1600285329775">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1600025130357" />
+    <state x="278" y="136" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1600285329775" />
     <state width="683" height="368" key="XDebugger.FullValuePopup" timestamp="1599929180963">
       <screen x="0" y="32" width="1366" height="736" />
     </state>

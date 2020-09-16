@@ -3,6 +3,7 @@ namespace SFS.Core
 open System.Data
 open System.IO
 open SFS.Core.Routing
+open SFS.Core.WebSockets
 
 module Server =
     open System
@@ -38,19 +39,29 @@ module Server =
               routeType = RouteType.Static }
             { contentType = ContentTypes.Jpg
               routePaths = seq { "/img/patrik-kernstock-8yN3T4XDJ70-unsplash.jpg" }
-              contentPath = "/home/max/Projects/SemiFunctionalServer/ExampleWebSite/img/patrik-kernstock-8yN3T4XDJ70-unsplash.jpg"
+              contentPath =
+                  "/home/max/Projects/SemiFunctionalServer/ExampleWebSite/img/patrik-kernstock-8yN3T4XDJ70-unsplash.jpg"
               routeType = RouteType.Static }
         }
 
+    let wsc =
+        seq { "echo", WebSocketChannel "echo" }
+        |> Map.ofSeq
+
+
     let notFound =
 
-        let paths = seq { "NotFound"; "404" }
+        let paths =
+            seq {
+                "NotFound"
+                "404"
+            }
 
         let content =
             File.ReadAllBytes("/home/max/Projects/SemiFunctionalServer/ExampleWebSite/404.html")
-//            |> Binary
+            //            |> Binary
             |> Some
-        
+
         { paths = paths
           contentType = ContentTypes.Html
           routeType = RouteType.Static
@@ -60,16 +71,16 @@ module Server =
 
     let i = 0
     /// The listening loop.
-    let rec listen (context:Context) =
+    let rec listen (context: Context) =
         // Await a connection.
         // This is blocking.
         let connection = listener.AcceptTcpClient()
 
         let handler = handleConnection context
-        
-        
-//        let routes = match context.routes.["/"].content with Some d -> d | None -> [||]
-        
+
+
+        //        let routes = match context.routes.["/"].content with Some d -> d | None -> [||]
+
         logger.Post
             { from = "Listener"
               message = "Connection received."
@@ -94,6 +105,7 @@ module Server =
         let context =
             { logger = logger
               routes = routeMap
+              wsChannels = wsc
               errorRoutes =
                   { notFound = notFound
                     internalError = notFound

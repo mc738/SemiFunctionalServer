@@ -16,10 +16,17 @@ module ConnectionHandler =
 
     type Context =
         { routes: Map<string, Route>
+          wsChannels: Map<string, WebSocketChannel>
           errorRoutes: ErrorRoutes
-          logger: Logger
-          connection: TcpClient }
+          logger: Logger }
 
+    type RequestContext = {
+        context: Context
+        request: Request
+        connection: TcpClient }
+
+ 
+    
     let standardHeaders =
         seq {
             "Server", "SFS"
@@ -81,24 +88,50 @@ module ConnectionHandler =
 
     module internal WebSocketHandler =
             
-        let wsHandler (context: Context) (connection: NetworkStream) =
+        let wsHandler (context: Context) (connection: NetworkStream) (request:Request) =
             
-            // TODO Get channel.
-            
-            let rec handlerLoop () = async {
+            let rec handlerLoop (ccd: ClientConnectionDetails) = async {
                 // Try read from the stream
                 if connection.DataAvailable then
                     let! data = Streams.readToBuffer connection 256
+                    
+                    let test = Encoding.UTF8.GetString data
+                    
+                    ccd.post (Text test)
+                    
                     ()
         
+                match ccd.get () with
+                | Some message ->
+
+                    match message with
+                    | Text t ->
+                        let d = Encoding.UTF8.GetBytes t
+                        connection.Write(d, 0, d.Length)
+                    | _ -> ()
+                | None -> ()
+                
                 // Try to read from channel.
                 
                             
-                return! handlerLoop ()
+                return! handlerLoop (ccd: ClientConnectionDetails)
             }
+            
+            let requestSections = request.route.Split('/') |> Array.filter (fun e -> e <> "")
+                 
+            match context.wsChannels.TryFind requestSections.[0] with
+            | Some channel ->
+                 
+                // Create the subscription and client connection details.
+                // Then sent the subscription to the channel and start the handler loop.                
+                let (subscription, ccd) = createSubscription channel
                 
-            handlerLoop () |> Async.RunSynchronously // TODO is this needed?
-
+                ccd.post (WebSocketMessage.NewSubscription subscription)
+                
+                handlerLoop (ccd) |> Async.RunSynchronously // TODO is this needed?
+                
+            | None -> () // TODO send 404 request/error
+            
             // TODO handle connection shutdown.
 
 
@@ -111,14 +144,9 @@ module ConnectionHandler =
         | Ok r ->
             let data = r |> serializeResponse
             connection.Write(data, 0, data.Length)
-
+            WebSocketHandler.wsHandler context connection request
         | Result.Error e ->
-
             ()
-
-
-
-
 
         // ...
 
