@@ -5,8 +5,8 @@
 
 ### Unit
 
-* Deserialized request
-* Serialize response
+* ~~Deserialized request~~
+* ~~Serialize response~~
 * create headers
 
 ### Integration

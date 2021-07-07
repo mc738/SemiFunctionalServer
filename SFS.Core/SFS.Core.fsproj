@@ -8,6 +8,7 @@
         <Compile Include="Utilities.fs" />
         <Compile Include="Logging.fs" />
         <Compile Include="Http.fs" />
+        <Compile Include="WebSockets.fs" />
         <Compile Include="Routing.fs" />
         <Compile Include="ConnectionHandler.fs" />
         <Compile Include="Server.fs" />

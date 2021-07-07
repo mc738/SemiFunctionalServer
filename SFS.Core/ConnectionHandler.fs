@@ -8,6 +8,7 @@ open SFS.Core.Utilities
 module ConnectionHandler =
 
     open SFS.Core.Http
+    open SFS.Core.WebSockets
     open SFS.Core.Logging
     open SFS.Core.Routing
     open SFS.Core.ContentTypes
@@ -15,70 +16,178 @@ module ConnectionHandler =
 
     type Context =
         { routes: Map<string, Route>
+          wsChannels: Map<string, WebSocketChannel>
           errorRoutes: ErrorRoutes
           logger: Logger }
 
+    type RequestContext = {
+        context: Context
+        request: Request
+        connection: TcpClient }
+
+ 
+    
     let standardHeaders =
         seq {
             "Server", "SFS"
             "Connection", "close"
         }
 
+    module internal HttpHandler =
 
-    let createResponseHeaders (contentType: ContentType) contentLength (otherHeaders: (string * string) seq) =
+        let createResponseHeaders (contentType: ContentType) contentLength (otherHeaders: (string * string) seq) =
 
-        let cDetails =
-            seq {
-                ("Content-Type", (getCTString contentType))
-                ("Content-Length", contentLength.ToString())
-            }
+            let cDetails =
+                seq {
+                    ("Content-Type", (getCTString contentType))
+                    ("Content-Length", contentLength.ToString())
+                }
 
-        standardHeaders
-        |> Seq.append cDetails
-        |> Seq.append otherHeaders
-        |> Map.ofSeq
+            standardHeaders
+            |> Seq.append cDetails
+            |> Seq.append otherHeaders
+            |> Map.ofSeq
 
-    let createResponse (route: Route) (context: Context) =
-        
-        // Get the content type and content.
-        let (contentType, content) =
-            match route.routeType with
-            | RouteType.Static -> (route.contentType, route.content)
+        let createResponse (route: Route) (context: Context) =
 
-        let contentLength =
-            match content with
-            | Some c -> c.Length
-            | None -> 0
+            // Get the content type and content.
+            let (contentType, content) =
+                match route.routeType with
+                | RouteType.Static -> (route.contentType, route.content)
 
-        // Any other headers associated with this response,
-        // i.e. none standard and now generated.
-        let otherHeaders = Seq.empty
-        
-        // Make the headers.
-        let headers = createResponseHeaders contentType contentLength otherHeaders
+            let contentLength =
+                match content with
+                | Some c -> c.Length
+                | None -> 0
 
-        // Create the body.
-        let body =
-            match content with
-            | Some v -> Some(Binary v)
-            | None -> None
+            // Any other headers associated with this response,
+            // i.e. none standard and now generated.
+            let otherHeaders = Seq.empty
 
-        // Create the response.
-        createResponse 200s headers body
+            // Make the headers.
+            let headers =
+                createResponseHeaders contentType contentLength otherHeaders
 
-    /// Handle a request and return a response.
-    /// This function is designed to be testable against, with out network infrastructure.
-    let handlerRequest context request =
-        let route =
-                match request with
-                | Ok r -> matchRoute context.routes context.errorRoutes.notFound r.route
-                | Result.Error e ->
-                    // TODO Log error.
-                    context.errorRoutes.badRequest
+            // Create the body.
+            let body =
+                match content with
+                | Some v -> Some(Http.Binary v)
+                | None -> None
+
+            // Create the response.
+            createResponse 200s headers body
+
+        /// Handle a request and return a response.
+        /// This function is designed to be testable against, with out network infrastructure.
+        let handlerRequest context request =
+            let route =
+                matchRoute context.routes context.errorRoutes.notFound request.route
 
             // Create the response and serialize it.
-        createResponse route context
+            createResponse route context
+
+    module internal WebSocketHandler =
+            
+        let wsHandler (context: Context) (connection: NetworkStream) (request:Request) =
+            
+            let rec handlerLoop (ccd: ClientConnectionDetails) = async {
+                // Try read from the stream
+                if connection.DataAvailable then
+                    let! data = Streams.readToBuffer connection 256
+                    
+                    match handleRead data with
+                    | Ok d ->
+                        let test = Encoding.UTF8.GetString (d |> Array.ofSeq)
+                        ccd.post (Text test)
+                    | Result.Error e ->
+                        // TODO log error.
+                        ()
         
+                match ccd.get () with
+                | Some message ->
+
+                    match message with
+                    | Text t ->
+                        let d = handlerWrite (Encoding.UTF8.GetBytes t)
+                        connection.Write(d, 0, d.Length)
+                    | _ -> ()
+                | None -> ()
+                
+                // Try to read from channel.
+                Async.Sleep 100 |> ignore
+                            
+                return! handlerLoop (ccd: ClientConnectionDetails)
+            }
+            
+            let requestSections = request.route.Split('/') |> Array.filter (fun e -> e <> "")
+                 
+            match context.wsChannels.TryFind requestSections.[0] with
+            | Some channel ->
+                 
+                // Create the subscription and client connection details.
+                // Then sent the subscription to the channel and start the handler loop.                
+                let (subscription, ccd) = createSubscription channel
+                
+                ccd.post (WebSocketMessage.NewSubscription subscription)
+                
+                handlerLoop (ccd) |> Async.RunSynchronously // TODO is this needed?
+                
+            | None -> () // TODO send 404 request/error
+            
+            // TODO handle connection shutdown.
+
+
+
+    let handleWebSockets (context: Context) (connection: NetworkStream) (request: Request) =
+        // Valid WS handshake and send server handshake.
+        let response = createWSHttpResponse request
+
+        match response with
+        | Ok r ->
+            let data = r |> serializeResponse
+            connection.Write(data, 0, data.Length)
+            WebSocketHandler.wsHandler context connection request
+        | Result.Error e ->
+            ()
+
+        // ...
+
+        ()
+
+    let handleHttp (context: Context) (connection: NetworkStream) (request: Request) =
+        let response =
+            HttpHandler.handlerRequest context request
+            |> serializeResponse
+
+        //        let test = Encoding.UTF8.GetString(response)
+
+        // Send the response.
+        connection.Write(response, 0, response.Length)
+
+        connection.Close()
+
+
+    let handle (context: Context) (connection: NetworkStream) (request: Result<Request, string>) =
+
+        match request with
+        | Ok r ->
+            // TODO handle case insensitivity.
+            let upgrade = getHeader r "Upgrade"
+            match upgrade with
+            | Some "websocket" -> handleWebSockets context connection r
+            | Some _ -> handleHttp context connection r
+            | None -> handleHttp context connection r
+        | Result.Error e ->
+            // TODO Log request error.
+            let response =
+                HttpHandler.createResponse context.errorRoutes.badRequest context
+                |> serializeResponse
+
+            connection.Write(response, 0, response.Length)
+            connection.Close()
+
+
+
     /// Accepts a context and a connection and handles it.
     /// This is meant to be run on a background thread.
     let handleConnection (context: Context) (connection: TcpClient) =
@@ -96,32 +205,24 @@ module ConnectionHandler =
 
             // Rec loop to make sure we don't read into buffer before data is available.
             // Github issue: `Issue with request buffer #4`
-            let rec waitForData() =
+            let rec waitForData () =
                 if stream.DataAvailable then
                     ()
                 else
                     Async.Sleep 100 |> ignore
-                    waitForData()
-            
-            waitForData()
-            
+                    waitForData ()
+
+            waitForData ()
+
             // Read the incoming request into the buffer.
-            let! buffer = Streams.readToBuffer stream 1056 // |> Async.RunSynchronously
+            let! buffer = Streams.readToBuffer stream 1056
 
             let request = deserializeRequest buffer
 
-            // Handle the request, and serialize the response.
-            let response = handlerRequest context request |> serializeResponse
-            
-            let test = Encoding.UTF8.GetString(response)
-            
-            
-            // Send the response.
-            stream.Write(response, 0, response.Length)
+            // TODO Need to check if there is anything special with this request, i.e. WS upgrade.
 
-            // Create the headers.
-            
-            connection.Close()
+            // The `handle` function will take care of responses from here.
+            handle context stream request
 
             return ()
         }

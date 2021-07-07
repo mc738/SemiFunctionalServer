@@ -74,7 +74,8 @@ module Http =
         | "PATCH" -> Patch
         | _ -> Get
 
-
+    let switchingProtocols = { name = "Switching Protocols"; code = 101s }
+        
     let ok = { name = "Ok"; code = 200s }
 
     let created = { name = "Created"; code = 201s }
@@ -97,6 +98,7 @@ module Http =
 
     let getStatus code =
         match code with
+        | 101s -> switchingProtocols
         | 200s -> ok
         | 201s -> created
         | 400s -> badRequest
